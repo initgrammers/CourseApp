@@ -1,20 +1,21 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
-
+import SearchSubject from "./Screens/SearchSubject/index";
+import FormSubject from "./Screens/FormSubject/";
+import SubjectStackNavigator from "./Navigation/SubjectStackNavigator";
+import * as Font from "expo-font";
 export default class AppEntry extends Component {
+  state = {
+    isLoading: true
+  };
+  async componentDidMount() {
+    await Font.loadAsync({
+      montserrat: require("./assets/fonts/Montserrat-Regular.ttf")
+    });
+    this.setState({ isLoading: false });
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
+    const { isLoading } = this.state;
+    return isLoading ? <></> : <SubjectStackNavigator />;
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
