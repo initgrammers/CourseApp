@@ -1,29 +1,42 @@
 import React from "react";
-import { Container, Picker } from "../../Components";
+import { Button, Container, Picker, CoverHeader } from "../../Components";
 import styled from "styled-components";
 import { ScrollView, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker from "react-native-modal-datetime-picker";
 const SearchSubjectLayout = props => {
-  const { goBack, subject } = props;
+  const {
+    goBack,
+    subject,
+    onValueChangeServicePicker,
+    onValueChangeSitePicker,
+    onValueChangeHours,
+    selectService,
+    selectSite,
+    isDateTimePickerVisible,
+    handleDatePicked,
+    hideDateTimePicker,
+    showDateTimePicker,
+    date,
+    hours,
+    onPressNext
+  } = props;
+  const { optionsSite, optionsServices } = subject;
+  const disabledButtonNext = !(
+    selectService !== 0 &&
+    selectSite !== 0 &&
+    date &&
+    !isNaN(hours) &&
+    Number(hours) <= 5 &&
+    Number(hours) >= 1
+  );
+
   return (
     <Container cover={true}>
-      <Cover>
-        <CoverImage source={subject.image} />
-        <CoverText>{subject.title}</CoverText>
-        <CloseView>
-          <TouchableOpacity onPress={goBack}>
-            <Ionicons name="ios-close" size={34} color="#384862" />
-          </TouchableOpacity>
-        </CloseView>
-      </Cover>
+      <CoverHeader subject={subject} goBack={goBack} showGoBack={true} />
       <ScrollView>
         <ContainerDetails>
-          <SelectService>
-            <Picker />
-          </SelectService>
           <RichText>
-            <Label>Enumera los temas que necesitas:</Label>
+            <Label>Ingresa los temas que necesitas:</Label>
             <TextInput
               multiline
               numberOfLines={3}
@@ -32,20 +45,44 @@ const SearchSubjectLayout = props => {
               style={{ textAlignVertical: "top" }}
             />
           </RichText>
-          <TimePicker>
-            {/* <DateTimePicker
-              value={new Date()}
-              mode="datetime"
-              // is24Hour={true}
-              display="default"
-              onChange={(event, date) => console.log(date)}
-            /> */}
-          </TimePicker>
-          <SelectPlace>
-            <Picker />
-          </SelectPlace>
-          <Total>$ 800</Total>
-          <ButtonNext title="Siguiente" />
+          <Picker
+            options={optionsServices}
+            onValueChange={onValueChangeServicePicker}
+            selectedItemValue={selectService}
+          />
+          <Picker
+            onValueChange={onValueChangeSitePicker}
+            selectedItemValue={selectSite}
+            options={optionsSite}
+          />
+          <TouchableOpacity onPress={showDateTimePicker}>
+            <ContainerInput
+              style={{ borderBottomColor: "black", borderBottomWidth: 1 }}
+            >
+              <Label>
+                {date
+                  ? `La tutoria será el ${date}`
+                  : "Selecciona aqui la fecha de la tutoria"}
+              </Label>
+              <DateTimePicker
+                mode="datetime"
+                isVisible={isDateTimePickerVisible}
+                onConfirm={handleDatePicked}
+                onCancel={hideDateTimePicker}
+              />
+            </ContainerInput>
+          </TouchableOpacity>
+          <HoursInput
+            placeholder="Número de horas"
+            keyboardType="phone-pad"
+            style={{ borderBottomColor: "black", borderBottomWidth: 1 }}
+            onChangeText={onValueChangeHours}
+          />
+          <Button
+            onPress={onPressNext}
+            title="Siguiente"
+            disabledButtonNext={disabledButtonNext}
+          />
         </ContainerDetails>
       </ScrollView>
     </Container>
@@ -66,89 +103,32 @@ const TextInput = styled.TextInput`
   font-size: 16px;
   padding-bottom: 8px;
   background-color: white;
+  font-family: "montserrat";
   margin-top: 8px;
   border-radius: 10px;
+`;
+const HoursInput = styled.TextInput`
+  margin-top: 12px;
+  font-family: "montserrat";
+  width: 340px;
+  height: 26px;
 `;
 const ContainerDetails = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
 `;
-const Cover = styled.View`
-  width: 100%;
-  height: 186px;
-`;
-const CoverImage = styled.Image`
-  width: 100%;
-  height: 100%;
-`;
-const CoverText = styled.Text`
-  font-size: 24px;
-  font-family: "montserrat";
-  color: white;
-  font-weight: bold;
-  position: absolute;
-  top: 28px;
-  left: 27px;
-`;
-const CloseView = styled.View`
-  width: 36px;
-  height: 36px;
-  border-radius: 18px;
-  background-color: white;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  top: 28px;
-  right: 27px;
-`;
-const SelectService = styled.View`
-  margin-top: 36px;
-  width: 340px;
-  height: 48px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  background-color: #dddddd;
-`;
 const RichText = styled.View`
-  margin-top: 26px;
+  margin-top: 20px;
   width: 340px;
   height: 180px;
   border-radius: 10px;
-  background-color: #dddddd;
+  background-color: #f5f5f5;
   padding: 0 21px;
 `;
-const TimePicker = styled.View`
-  margin-top: 31px;
+const ContainerInput = styled.View`
+  margin-top: 12px;
   width: 340px;
-  height: 26px;
-  border-radius: 10px;
-  background-color: #dddddd;
-`;
-
-const SelectPlace = styled.View`
-  margin-top: 27px;
-  width: 340px;
-  height: 48px;
-  border-radius: 10px;
-  background-color: #dddddd;
-`;
-const Total = styled.Text`
-  margin-top: 32px;
-  margin-bottom: 32px;
-  width: 100%;
-  text-align: right;
-  font-size: 24px;
-  line-height: 29px;
-  padding-right: 16px;
-  padding-top: 12px;
-  font-weight: bold;
-  background-color: #f5f5f5;
-  height: 48px;
-`;
-const ButtonNext = styled.Button`
-  margin-top: 123px;
-  width: 250px;
-  height: 48px;
+  height: 46px;
+  background-color: white;
 `;

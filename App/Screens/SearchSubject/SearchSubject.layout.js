@@ -1,170 +1,41 @@
 import React from "react";
 import { Container, Text } from "../../Components";
 import styled from "styled-components";
-import { ScrollView, TouchableOpacity } from "react-native";
+import { ScrollView, TouchableWithoutFeedback } from "react-native";
 
 const SearchSubjectLayout = props => {
-  const { navigateFormSubject } = props;
+  const { navigateFormSubject, subjects, onChangeText, noData } = props;
   return (
     <Container>
       <SearchView style={{ elevation: 12 }}>
-        <InputSearch placeholder="Buscar materia" />
+        <InputSearch onChangeText={onChangeText} placeholder="Buscar materia" />
         <SearchIcon source={require("../../assets/icons/buscar.png")} />
       </SearchView>
       <Text>Sugerencias</Text>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <SubjectsView>
-          {subjects.map((item, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => navigateFormSubject(item)}
-            >
-              <CardSubject>
-                <ImageCard source={item.image} />
-                <TextCard>{item.title}</TextCard>
-              </CardSubject>
-            </TouchableOpacity>
-          ))}
-        </SubjectsView>
+        {noData ? (
+          <Text>Sin coincidencias</Text>
+        ) : (
+          <SubjectsView>
+            {subjects.map((item, index) => (
+              <TouchableWithoutFeedback
+                key={index}
+                onPress={() => navigateFormSubject(item)}
+              >
+                <CardSubject style={{ elevation: 5 }}>
+                  <ImageCard source={item.image} />
+                  <TextCard>{item.title}</TextCard>
+                </CardSubject>
+              </TouchableWithoutFeedback>
+            ))}
+          </SubjectsView>
+        )}
       </ScrollView>
     </Container>
   );
 };
 export default SearchSubjectLayout;
-const subjects = [
-  {
-    title: "Inglés",
-    image: require("../../assets/images/inglés.png")
-  },
-  {
-    title: "Dibujo",
-    image: require("../../assets/images/dibujo.png")
-  },
-  {
-    title: "Física",
-    image: require("../../assets/images/física.png")
-  },
-  {
-    title: "Geometría",
-    image: require("../../assets/images/geometria.png")
-  },
-  {
-    title: "Matemáticas",
-    image: require("../../assets/images/matematicas.png")
-  },
-  {
-    title: "Programación",
-    image: require("../../assets/images/programacion.png")
-  },
-  {
-    title: "Psicologia",
-    image: require("../../assets/images/psicologia.png")
-  },
-  ,
-  {
-    title: "Química",
-    image: require("../../assets/images/química.png")
-  },
-  {
-    title: "Inglés",
-    image: require("../../assets/images/inglés.png")
-  },
-  {
-    title: "Dibujo",
-    image: require("../../assets/images/dibujo.png")
-  },
-  {
-    title: "Física",
-    image: require("../../assets/images/física.png")
-  },
-  {
-    title: "Geometría",
-    image: require("../../assets/images/geometria.png")
-  },
-  {
-    title: "Matemáticas",
-    image: require("../../assets/images/matematicas.png")
-  },
-  {
-    title: "Programación",
-    image: require("../../assets/images/programacion.png")
-  },
-  {
-    title: "Psicologia",
-    image: require("../../assets/images/psicologia.png")
-  },
-  ,
-  {
-    title: "Química",
-    image: require("../../assets/images/química.png")
-  },
-  {
-    title: "Inglés",
-    image: require("../../assets/images/inglés.png")
-  },
-  {
-    title: "Dibujo",
-    image: require("../../assets/images/dibujo.png")
-  },
-  {
-    title: "Física",
-    image: require("../../assets/images/física.png")
-  },
-  {
-    title: "Geometría",
-    image: require("../../assets/images/geometria.png")
-  },
-  {
-    title: "Matemáticas",
-    image: require("../../assets/images/matematicas.png")
-  },
-  {
-    title: "Programación",
-    image: require("../../assets/images/programacion.png")
-  },
-  {
-    title: "Psicologia",
-    image: require("../../assets/images/psicologia.png")
-  },
-  ,
-  {
-    title: "Química",
-    image: require("../../assets/images/química.png")
-  },
-  {
-    title: "Inglés",
-    image: require("../../assets/images/inglés.png")
-  },
-  {
-    title: "Dibujo",
-    image: require("../../assets/images/dibujo.png")
-  },
-  {
-    title: "Física",
-    image: require("../../assets/images/física.png")
-  },
-  {
-    title: "Geometría",
-    image: require("../../assets/images/geometria.png")
-  },
-  {
-    title: "Matemáticas",
-    image: require("../../assets/images/matematicas.png")
-  },
-  {
-    title: "Programación",
-    image: require("../../assets/images/programacion.png")
-  },
-  {
-    title: "Psicologia",
-    image: require("../../assets/images/psicologia.png")
-  },
-  ,
-  {
-    title: "Química",
-    image: require("../../assets/images/química.png")
-  }
-];
+
 const SearchView = styled.View`
   height: 50px;
   width: 100%;
