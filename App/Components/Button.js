@@ -1,26 +1,40 @@
 import React from "react";
 import styled from "styled-components";
-import { Button } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 export default props => {
   const { title, color = "#04B6D0", disabledButtonNext = false } = props;
   return (
-    <ButtonView
-    //  style={{ elevation: 8 }}
-    >
-      <Button
-        title={title}
-        color={color}
+    <Container>
+      <TouchableOpacity
         disabled={disabledButtonNext}
+        style={{
+          width: 250,
+          height: 36,
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 10,
+          backgroundColor: disabledButtonNext ? "#dddddd" : color,
+          elevation: 8
+        }}
         {...props}
-      />
-    </ButtonView>
+      >
+        <TextButton>{title}</TextButton>
+      </TouchableOpacity>
+    </Container>
   );
 };
-const ButtonView = styled.View`
-  width: 250px;
-  height: 36px;
-  margin-top: 28px;
-  border-radius: 10px;
-  overflow: hidden;
+const Container = styled.View`
+  width: 100%;
+  height: 64px;
+  padding: 14px 0;
+  align-items: center;
+`;
+const TextButton = styled.Text`
+  font-family: "montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
 `;

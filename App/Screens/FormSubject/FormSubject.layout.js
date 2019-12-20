@@ -10,6 +10,7 @@ const SearchSubjectLayout = props => {
     onValueChangeServicePicker,
     onValueChangeSitePicker,
     onValueChangeHours,
+    onValueDescriptionTheme,
     selectService,
     selectSite,
     isDateTimePickerVisible,
@@ -43,6 +44,7 @@ const SearchSubjectLayout = props => {
               autoCorrect={true}
               autoCapitalize={"sentences"}
               style={{ textAlignVertical: "top" }}
+              onChangeText={onValueDescriptionTheme}
             />
           </RichText>
           <Picker

@@ -7,7 +7,7 @@ const hideKeyboard = () => {
 export default props => {
   const { children, cover = false, bgColor = "white" } = props;
   return (
-    <Container bgColor={bgColor}>
+    <Container bgColor={bgColor} {...props}>
       <TouchableWithoutFeedback onPress={hideKeyboard}>
         {cover ? <>{children}</> : <Content>{children}</Content>}
       </TouchableWithoutFeedback>
@@ -21,5 +21,5 @@ const Container = styled.View`
 `;
 const Content = styled.View`
   flex: 1;
-  margin: 32px 13px 20px 13px;
+  margin: 32px 13px 8px 13px;
 `;

@@ -6,6 +6,7 @@ import Button from "./Button";
 import Title from "./Title";
 import TopicText from "./TopicText";
 import DotWithTopicText from "./DotWithTopicText";
+import SubjectResume from "./SubjectResume";
 export {
   Button,
   Container,
@@ -14,5 +15,6 @@ export {
   Title,
   DotWithTopicText,
   TopicText,
-  CoverHeader
+  CoverHeader,
+  SubjectResume
 };

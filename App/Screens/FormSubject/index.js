@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import Layout from "./FormSubject.layout";
+import { connect } from "react-redux";
+
 class FormSubject extends Component {
   state = {
     selectService: 0,
     selectSite: 0,
     isDateTimePickerVisible: false,
     tutoringDate: "",
-    hours: ""
+    hours: "",
+    descriptionTheme: ""
   };
   goBack = () => {
     this.props.navigation.goBack();
@@ -28,6 +31,9 @@ class FormSubject extends Component {
     this.setState({ isDateTimePickerVisible: false });
   };
 
+  onValueDescriptionTheme = value => {
+    this.setState({ descriptionTheme: value });
+  };
   handleDatePicked = date => {
     const day = date.getDate();
     const month = date.getMonth() + 1;
@@ -41,7 +47,13 @@ class FormSubject extends Component {
     this.hideDateTimePicker();
   };
   onPressNext = () => {
-    const { selectService, selectSite, tutoringDate, hours } = this.state;
+    const {
+      selectService,
+      selectSite,
+      tutoringDate,
+      hours,
+      descriptionTheme
+    } = this.state;
     const { navigation } = this.props;
     const subject = navigation.getParam("item");
 
@@ -51,7 +63,8 @@ class FormSubject extends Component {
         selectSite,
         tutoringDate,
         hours,
-        subject
+        subject,
+        descriptionTheme
       }
     });
   };
@@ -65,6 +78,7 @@ class FormSubject extends Component {
       tutoringDate,
       hours
     } = this.state;
+
     return (
       <Layout
         onPressNext={this.onPressNext}
@@ -81,8 +95,11 @@ class FormSubject extends Component {
         onValueChangeHours={this.onValueChangeHours}
         hideDateTimePicker={this.hideDateTimePicker}
         showDateTimePicker={this.showDateTimePicker}
+        onValueDescriptionTheme={this.onValueDescriptionTheme}
       />
     );
   }
 }
+
+// export default connect(mapStateToProps, mapDispachToProps)(FormSubject);
 export default FormSubject;

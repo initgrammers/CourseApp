@@ -11,23 +11,26 @@ import {
 
 const DetailsBuySubjectLayout = props => {
   const { details, onPressConfirm } = props;
+  const { descriptionTheme } = details;
+  const description =
+    descriptionTheme !== "" && descriptionTheme.lenght > 10
+      ? [details.descriptionTheme]
+      : ["Clases"];
   return (
     <Container>
       <Center>
         <Title>Detalles de la compra</Title>
         <CoverHeader
           subject={details.subject}
-          style={{ borderRadius: 10, overflow: "hidden" }}
+          style={{
+            borderRadius: 10,
+            overflow: "hidden",
+            elevation: 10
+          }}
         />
       </Center>
       <TopicText title="Fecha: " text={details.tutoringDate} />
-      <DotWithTopicText
-        title="Temas: "
-        list={[
-          "Resolver ejercicios de movimiento rectilineo uniforme",
-          "Revisar teoria de moviento parabolico"
-        ]}
-      />
+      <DotWithTopicText title="Temas: " list={description} />
       <TopicText title="Lugar: " text={details.selectSite} />
       <TopicText title="Horas: " text={details.hours} />
       <ContainerPay>
@@ -39,7 +42,9 @@ const DetailsBuySubjectLayout = props => {
         ))}
         <DetailContainer>
           <TextDetail left={true}>Pago en Efectivo</TextDetail>
-          <TextDetail bold={true}>$ {details.hours * 5}</TextDetail>
+          <TextDetail bold={true}>
+            $ {Number(details.hours * 5).toFixed(2)}
+          </TextDetail>
         </DetailContainer>
       </ContainerPay>
       <Center>

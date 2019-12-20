@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import SearchSubject from "./Screens/SearchSubject/index";
-import FormSubject from "./Screens/FormSubject/";
-import SubjectStackNavigator from "./Navigation/SubjectStackNavigator";
+import AppNavigation from "./Navigation/";
+import { Provider } from "react-redux";
+import store from "../App/Redux";
+
 import * as Font from "expo-font";
 export default class AppEntry extends Component {
   state = {
@@ -16,6 +17,8 @@ export default class AppEntry extends Component {
 
   render() {
     const { isLoading } = this.state;
-    return isLoading ? <></> : <SubjectStackNavigator />;
+    return (
+      <Provider store={store}>{isLoading ? <></> : <AppNavigation />}</Provider>
+    );
   }
 }

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ContainerText from "./ContainerText";
 export default props => {
   const { title, list = [], isLigh } = props;
-  console.log(isLigh);
   return (
     <ContainerTopic>
       <Topic isLigh={isLigh}>{title}</Topic>
