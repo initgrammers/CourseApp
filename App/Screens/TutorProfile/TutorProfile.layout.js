@@ -1,58 +1,92 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  Container,
-  Title,
-  TopicText,
-  DotWithTopicText
+  TextApp,
+  Avatar,
+  RatingStarts,
+  DotWithTopicText,
+  CloseView,
+  Comment
 } from "../../Components";
+import { ScrollView, FlatList, SafeAreaView } from "react-native";
+const starts = 3.7;
+const works = 38;
 
+const comments = [
+  {
+    name: "Raúl Perez",
+    comment: "Cristian es un excelente profesor, pasé gracias a él."
+  },
+  {
+    name: "Carla Alvarez",
+    comment:
+      "Buen profesor. Gracias por toda la ayuda, química no será más un problema"
+  },
+
+  {
+    name: "Alfonso Andrade",
+    comment: "Buen profesor, recomendado."
+  },
+
+  {
+    name: "Alberto Caballero",
+    comment: "5⭐ más profes así ."
+  }
+];
 export default props => {
+  const { goBack } = props;
   return (
-    <Container bgColor="#384862">
-      <Title style={{ textAlign: "center", color: "#F5F5F5" }}>
-        Tutor Asignado
-      </Title>
-      <Avatar source={{ uri: "https://uinames.com/api/photos/male/9.jpg" }} />
-      <Title
-        style={{ textAlign: "center", color: "#F5F5F5", fontWeight: "300" }}
-      >
-        Cristian Ronda
-      </Title>
-      <ContainerDetailsTutor>
-        <TopicText
-          title="Celular: "
-          text="0987868889"
-          colorText="#F5F5F5"
-          colorTitle="#F5F5F5"
-        />
-        <TopicText
-          title="Correo: "
-          text="cristian.ronda@epn.edu.ec"
-          colorText="#F5F5F5"
-          colorTitle="#F5F5F5"
-        />
-        <DotWithTopicText
-          isLigh={true}
-          title="Habilidades: "
-          list={[
-            "Fisico - Quimico",
-            "Desarrollo de software",
-            "Microsoft Office"
-          ]}
-        />
-      </ContainerDetailsTutor>
+    <Container>
+      <Content style={{ elevation: 12 }}>
+        <CloseView onPress={goBack} />
+        <ScrollView>
+          <TextApp fontSize="20px" mt="12px" color="white" bold="500">
+            Cristian Ronda
+          </TextApp>
+          <Avatar />
+          <TextApp fontSize="20px" mt="12px" color="white" bold="300">
+            Profesor
+          </TextApp>
+          <RatingStarts starts={starts} />
+          <TextApp mt="12px" color="white" bold="300">
+            {`${works} trabajos completados`}
+          </TextApp>
+          <DotWithTopicText
+            mt="0"
+            ml="26px"
+            isLigh={true}
+            title="Habilidades: "
+            list={[
+              "Fisico - Quimico",
+              "Desarrollo de software",
+              "Microsoft Office"
+            ]}
+          />
+        </ScrollView>
+      </Content>
+      <SafeAreaView style={{ flex: 1 }}>
+        <CommentsContainer>
+          <TextApp fontSize="20px" bold="500" color="black" align="left">
+            Comentarios
+          </TextApp>
+          <FlatList
+            data={comments}
+            keyExtractor={(item, index) => item.name.toString()}
+            renderItem={({ item }) => <Comment {...item} />}
+          />
+        </CommentsContainer>
+      </SafeAreaView>
     </Container>
   );
 };
-
-const Avatar = styled.Image`
-  align-self: center;
-  width: 175px;
-  height: 175px;
-  border-radius: 85px;
-  margin-bottom: 8px;
+const Container = styled.View`
+  flex: 1;
 `;
-const ContainerDetailsTutor = styled.View`
-  margin: 10px 33px;
+const Content = styled.View`
+  background-color: #384862;
+  padding: 32px 12px 8px 12px;
+  height: 70%;
+`;
+const CommentsContainer = styled.View`
+  margin: 17px;
 `;

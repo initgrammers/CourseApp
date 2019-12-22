@@ -1,15 +1,17 @@
 import React from "react";
 import { FlatList } from "react-native";
-import { Container, Title, SubjectResume } from "../../Components";
+import { Container, TextApp, SubjectResume } from "../../Components";
 const SubjectNotification = props => {
-  const { subjects = [] } = props;
+  const { subjects = [], onPressSubject } = props;
   return (
     <Container>
-      <Title style={{ textAlign: "center" }}>Tutorías Pendientes</Title>
+      <TextApp style={{ textAlign: "center" }}>Tutorías Pendientes</TextApp>
       <FlatList
         data={subjects}
-        renderItem={({ item }) => <SubjectResume item={item} />}
-        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <SubjectResume item={item} onPress={item => onPressSubject(item)} />
+        )}
+        keyExtractor={item => item.id.toString()}
       />
     </Container>
   );

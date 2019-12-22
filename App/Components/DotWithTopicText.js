@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import ContainerText from "./ContainerText";
 export default props => {
-  const { title, list = [], isLigh } = props;
+  const { title, list = [], isLigh, mt = "27px", ml = "0px" } = props;
   return (
-    <ContainerTopic>
+    <ContainerTopic mt={mt} ml={ml}>
       <Topic isLigh={isLigh}>{title}</Topic>
       {list.map((text, index) => (
         <ContainerText key={index}>
@@ -19,7 +19,8 @@ export default props => {
 };
 const ContainerTopic = styled.View`
   flex-direction: column;
-  margin-top: 27px;
+  margin-top: ${props => props.mt};
+  margin-left: ${props => props.ml};
   width: 100%;
 `;
 const Topic = styled.Text`
@@ -40,7 +41,6 @@ const TextTopic = styled.Text`
   font-size: 14px;
   line-height: 17px;
   color: ${props => (props.isLigh ? "#F5F5F5" : "#535157")};
-  /* color: black; */
   font-family: "montserrat";
   margin-top: ${props => (props.marginTop ? props.marginTop : 0)};
   text-align: justify;

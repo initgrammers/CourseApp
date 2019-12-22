@@ -4,7 +4,7 @@ import {
   Container,
   CoverHeader,
   Button,
-  Title,
+  TextApp,
   TopicText,
   DotWithTopicText
 } from "../../Components";
@@ -18,17 +18,15 @@ const DetailsBuySubjectLayout = props => {
       : ["Clases"];
   return (
     <Container>
-      <Center>
-        <Title>Detalles de la compra</Title>
-        <CoverHeader
-          subject={details.subject}
-          style={{
-            borderRadius: 10,
-            overflow: "hidden",
-            elevation: 10
-          }}
-        />
-      </Center>
+      <TextApp>Detalles de la compra</TextApp>
+      <CoverHeader
+        subject={details.subject}
+        style={{
+          borderRadius: 10,
+          overflow: "hidden",
+          elevation: 10
+        }}
+      />
       <TopicText title="Fecha: " text={details.tutoringDate} />
       <DotWithTopicText title="Temas: " list={description} />
       <TopicText title="Lugar: " text={details.selectSite} />

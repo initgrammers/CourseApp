@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native";
 export default props => {
-  const { item } = props;
+  const { item, onPress } = props;
   const { title, date, place, price, image } = item;
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <CardContainer>
         <SubjectImage source={image} />
         <DetailTutorial>

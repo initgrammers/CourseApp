@@ -24,11 +24,25 @@ const SUBJECTS_CONST = [
     date: "12/12/2019 08:00",
     place: "Biblioteca ICB",
     price: "20"
+  },
+  {
+    id: 4,
+    title: "Geometria",
+    image: require("../../assets/images/geometria.png"),
+    date: "12/12/2019 08:00",
+    place: "Biblioteca ICB",
+    price: "20"
   }
 ];
 class SubjectNotification extends Component {
+  onPressSubject = item => {
+    const { navigation } = this.props;
+    navigation.navigate("CommentTutor");
+  };
   render() {
-    return <Layout subjects={SUBJECTS_CONST} />;
+    return (
+      <Layout subjects={SUBJECTS_CONST} onPressSubject={this.onPressSubject} />
+    );
   }
 }
 export default SubjectNotification;

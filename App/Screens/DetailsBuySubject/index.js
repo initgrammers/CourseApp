@@ -3,7 +3,7 @@ import Layout from "./DetailsBuySubject.layout";
 class DetailBuySubject extends Component {
   onPressConfirm = () => {
     const { navigation } = this.props;
-    navigation.navigate("TutorProfile");
+    navigation.navigate("InfoTutor");
   };
   render() {
     const { navigation } = this.props;

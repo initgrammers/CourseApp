@@ -1,3 +1,3 @@
 import { createAppContainer } from "react-navigation";
-import SubjectBottomTabNavigator from "./SubjectBottomTabNavigator";
-export default createAppContainer(SubjectBottomTabNavigator);
+import SwitchNavigator from "./SwitchNavigator";
+export default createAppContainer(SwitchNavigator);

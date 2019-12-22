@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import SubjectStackNavigator from "./SubjectStackNavigator";
-import SubjectNotification from "../Screens/SubjectNotification";
+import PedingSubjectStackNavigator from "./PendingSubjectStackNavigator";
 import { Ionicons } from "@expo/vector-icons";
 const SubjectBottomTabNavigator = createBottomTabNavigator(
   {
@@ -15,7 +15,7 @@ const SubjectBottomTabNavigator = createBottomTabNavigator(
       }
     },
     SubjectNotification: {
-      screen: SubjectNotification,
+      screen: PedingSubjectStackNavigator,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <Ionicons name="ios-notifications" color={tintColor} size={28} />

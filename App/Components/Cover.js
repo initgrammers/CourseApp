@@ -1,6 +1,7 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import CloseView from "./CloseView";
 import styled from "styled-components";
 
 export default props => {
@@ -9,13 +10,7 @@ export default props => {
     <Cover {...props}>
       <CoverImage source={subject.image} />
       <CoverText>{subject.title}</CoverText>
-      {showGoBack && (
-        <CloseView>
-          <TouchableOpacity onPress={goBack}>
-            <Ionicons name="ios-close" size={34} color="#384862" />
-          </TouchableOpacity>
-        </CloseView>
-      )}
+      {showGoBack && <CloseView onPress={goBack} />}
     </Cover>
   );
 };
@@ -36,14 +31,14 @@ const CoverText = styled.Text`
   top: 28px;
   left: 27px;
 `;
-const CloseView = styled.View`
-  width: 36px;
-  height: 36px;
-  border-radius: 18px;
-  background-color: white;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  top: 28px;
-  right: 27px;
-`;
+// const CloseView = styled.View`
+//   width: 36px;
+//   height: 36px;
+//   border-radius: 18px;
+//   background-color: white;
+//   position: absolute;
+//   justify-content: center;
+//   align-items: center;
+//   top: 28px;
+//   right: 27px;
+// `;

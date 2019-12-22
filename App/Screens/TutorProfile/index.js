@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import Layout from "./TutorProfile.layout";
-class TutorProfile extends Component {
+export default class TutorProfile extends Component {
+  goBack = () => {
+    alert("Hola");
+    this.props.navigation.goBack();
+  };
   render() {
-    return <Layout />;
+    return <Layout goBack={this.goBack} />;
   }
 }
-export default TutorProfile;

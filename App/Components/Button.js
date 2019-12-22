@@ -3,14 +3,21 @@ import styled from "styled-components";
 import { TouchableOpacity } from "react-native";
 
 export default props => {
-  const { title, color = "#04B6D0", disabledButtonNext = false } = props;
+  const {
+    title,
+    color = "#04B6D0",
+    disabledButtonNext = false,
+    width = 250,
+    height = 36,
+    textSize = "14px"
+  } = props;
   return (
     <Container>
       <TouchableOpacity
         disabled={disabledButtonNext}
         style={{
-          width: 250,
-          height: 36,
+          width: width,
+          height: height,
           justifyContent: "center",
           alignItems: "center",
           borderRadius: 10,
@@ -19,7 +26,7 @@ export default props => {
         }}
         {...props}
       >
-        <TextButton>{title}</TextButton>
+        <TextButton textSize={textSize}>{title}</TextButton>
       </TouchableOpacity>
     </Container>
   );
@@ -31,10 +38,12 @@ const Container = styled.View`
   align-items: center;
 `;
 const TextButton = styled.Text`
+  padding-top: 2px;
   font-family: "montserrat";
+  text-align: center;
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
+  font-size: ${props => props.textSize};
   line-height: 17px;
   color: #ffffff;
 `;
