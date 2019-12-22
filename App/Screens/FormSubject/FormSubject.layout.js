@@ -7,11 +7,11 @@ const SearchSubjectLayout = props => {
   const {
     goBack,
     subject,
-    onValueChangeServicePicker,
+    // onValueChangeServicePicker,
     onValueChangeSitePicker,
     onValueChangeHours,
     onValueDescriptionTheme,
-    selectService,
+    // selectService,
     selectSite,
     isDateTimePickerVisible,
     handleDatePicked,
@@ -19,16 +19,21 @@ const SearchSubjectLayout = props => {
     showDateTimePicker,
     date,
     hours,
-    onPressNext
+    onPressNext,
+    optionsSite
   } = props;
-  const { optionsSite, optionsServices } = subject;
+  // const {
+  //   // optionsServices
+  // } = subject;
   const disabledButtonNext = !(
-    selectService !== 0 &&
-    selectSite !== 0 &&
-    date &&
-    !isNaN(hours) &&
-    Number(hours) <= 5 &&
-    Number(hours) >= 1
+    // selectService !== 0 &&
+    (
+      selectSite !== 0 &&
+      date &&
+      !isNaN(hours) &&
+      Number(hours) <= 5 &&
+      Number(hours) >= 1
+    )
   );
 
   return (
@@ -47,11 +52,11 @@ const SearchSubjectLayout = props => {
               onChangeText={onValueDescriptionTheme}
             />
           </RichText>
-          <Picker
+          {/* <Picker
             options={optionsServices}
             onValueChange={onValueChangeServicePicker}
             selectedItemValue={selectService}
-          />
+          /> */}
           <Picker
             onValueChange={onValueChangeSitePicker}
             selectedItemValue={selectSite}

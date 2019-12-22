@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Layout from "./FormSubject.layout";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
+import { getPlaces } from "../../services/Firebase/Firebase";
 
 class FormSubject extends Component {
   state = {
@@ -9,7 +10,8 @@ class FormSubject extends Component {
     isDateTimePickerVisible: false,
     tutoringDate: "",
     hours: "",
-    descriptionTheme: ""
+    descriptionTheme: "",
+    optionsSite: []
   };
   goBack = () => {
     this.props.navigation.goBack();
@@ -17,9 +19,9 @@ class FormSubject extends Component {
   onValueChangeHours = value => {
     this.setState({ hours: value });
   };
-  onValueChangeServicePicker = value => {
-    this.setState({ selectService: value });
-  };
+  // onValueChangeServicePicker = value => {
+  //   this.setState({ selectService: value });
+  // };
   onValueChangeSitePicker = value => {
     this.setState({ selectSite: value });
   };
@@ -40,12 +42,12 @@ class FormSubject extends Component {
     const year = date.getFullYear();
     const hour = date.getHours();
     const minute = date.getMinutes();
-
     this.setState({
       tutoringDate: `${day}/${month}/${year} - ${hour}:${minute}`
     });
     this.hideDateTimePicker();
   };
+
   onPressNext = () => {
     const {
       selectService,
@@ -56,7 +58,6 @@ class FormSubject extends Component {
     } = this.state;
     const { navigation } = this.props;
     const subject = navigation.getParam("item");
-
     navigation.navigate("DetailsBuySubject", {
       details: {
         selectService,
@@ -68,15 +69,27 @@ class FormSubject extends Component {
       }
     });
   };
+
+  componentDidMount() {
+    getPlaces().then(snapshot => {
+      const optionsSite = Object.values(snapshot.val()).map(item => ({
+        label: item.name,
+        value: item.name
+      }));
+      this.setState({ optionsSite });
+    });
+  }
+
   render() {
     const { navigation } = this.props;
     const subject = navigation.getParam("item");
     const {
-      selectService,
+      // selectService,
       selectSite,
       isDateTimePickerVisible,
       tutoringDate,
-      hours
+      hours,
+      optionsSite
     } = this.state;
 
     return (
@@ -86,9 +99,10 @@ class FormSubject extends Component {
         subject={subject}
         date={tutoringDate}
         hours={hours}
-        selectService={selectService}
+        optionsSite={optionsSite}
+        // selectService={selectService}
         selectSite={selectSite}
-        onValueChangeServicePicker={this.onValueChangeServicePicker}
+        // onValueChangeServicePicker={this.onValueChangeServicePicker}
         onValueChangeSitePicker={this.onValueChangeSitePicker}
         isDateTimePickerVisible={isDateTimePickerVisible}
         handleDatePicked={this.handleDatePicked}

@@ -3,6 +3,8 @@ import { FlatList } from "react-native";
 import { Container, TextApp, SubjectResume } from "../../Components";
 const SubjectNotification = props => {
   const { subjects = [], onPressSubject } = props;
+  console.log(subjects);
+
   return (
     <Container>
       <TextApp style={{ textAlign: "center" }}>Tutorías Pendientes</TextApp>

@@ -3,18 +3,18 @@ import styled from "styled-components";
 import { TouchableOpacity } from "react-native";
 export default props => {
   const { item, onPress } = props;
-  const { title, date, place, price, image } = item;
+  const { subject, date, location, totalCost, image } = item;
   return (
     <TouchableOpacity onPress={onPress}>
       <CardContainer>
-        <SubjectImage source={image} />
+        <SubjectImage source={{ uri: image }} />
         <DetailTutorial>
-          <TitleSubjectNotification>{title}</TitleSubjectNotification>
+          <TitleSubjectNotification>{subject}</TitleSubjectNotification>
           <TextSubjectNotification>{date}</TextSubjectNotification>
-          <TextSubjectNotification>{place}</TextSubjectNotification>
+          <TextSubjectNotification>{location}</TextSubjectNotification>
         </DetailTutorial>
         <TitleSubjectNotification>
-          {`$ ${Number(price).toFixed(2)}`}
+          {`$ ${Number(totalCost).toFixed(2)}`}
         </TitleSubjectNotification>
       </CardContainer>
     </TouchableOpacity>

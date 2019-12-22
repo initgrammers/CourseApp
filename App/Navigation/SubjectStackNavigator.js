@@ -4,7 +4,6 @@ import FormSubject from "../Screens/FormSubject";
 import DetailsBuySubject from "../Screens/DetailsBuySubject/";
 import InfoTutor from "../Screens/InfoTutor/";
 import TutorProfile from "../Screens/TutorProfile";
-import Login from "../Screens/Login";
 const SubjectStackNavigator = createStackNavigator(
   {
     SearchSubject,

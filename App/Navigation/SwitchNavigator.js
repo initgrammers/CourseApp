@@ -7,7 +7,7 @@ const SwitchWithLogin = createSwitchNavigator(
     SubjectBottomTabNavigator
   },
   {
-    initialRouteName: "Login"
+    initialRouteName: "SubjectBottomTabNavigator"
   }
 );
 export default SwitchWithLogin;

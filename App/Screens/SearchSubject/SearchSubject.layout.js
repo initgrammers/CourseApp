@@ -23,8 +23,8 @@ const SearchSubjectLayout = props => {
                 onPress={() => navigateFormSubject(item)}
               >
                 <CardSubject style={{ elevation: 5 }}>
-                  <ImageCard source={item.image} />
-                  <TextCard>{item.title}</TextCard>
+                  <ImageCard source={{ uri: item.image }} />
+                  <TextCard>{item.name}</TextCard>
                 </CardSubject>
               </TouchableWithoutFeedback>
             ))}

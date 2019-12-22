@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Layout from "./Login.layout";
 import { Alert } from "react-native";
+import { signIn } from "../../services/Firebase/Firebase";
 class Login extends Component {
   state = {
     email: "",
@@ -22,9 +23,17 @@ class Login extends Component {
     this.setState({ password: value });
   };
   onPressLogin = () => {
-    Alert.alert("Login", "Login!");
-    const { navigation } = this.props;
-    navigation.navigate("SubjectBottomTabNavigator");
+    const { email, password } = this.state;
+    signIn(email, password)
+      .then(() => {
+        const { navigation } = this.props;
+        navigation.navigate("SubjectBottomTabNavigator");
+      })
+      .catch(error => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorMessage);
+      });
   };
   render() {
     return (

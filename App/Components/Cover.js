@@ -8,7 +8,7 @@ export default props => {
   const { subject, goBack, showGoBack = false } = props;
   return (
     <Cover {...props}>
-      <CoverImage source={subject.image} />
+      <CoverImage source={{ uri: subject.image }} />
       <CoverText>{subject.title}</CoverText>
       {showGoBack && <CloseView onPress={goBack} />}
     </Cover>

@@ -1,47 +1,34 @@
 import React, { Component } from "react";
 import Layout from "./SubjectNotification.layout";
-const SUBJECTS_CONST = [
-  {
-    id: 1,
-    title: "Fisica",
-    image: require("../../assets/images/física.png"),
-    date: "12/12/2019 08:00",
-    place: "Biblioteca Sistemas",
-    price: "15"
-  },
-  {
-    id: 2,
-    title: "Química",
-    image: require("../../assets/images/química.png"),
-    date: "15/12/2019 14:00",
-    place: "Biblioteca Central",
-    price: "10"
-  },
-  {
-    id: 3,
-    title: "Geometria",
-    image: require("../../assets/images/geometria.png"),
-    date: "12/12/2019 08:00",
-    place: "Biblioteca ICB",
-    price: "20"
-  },
-  {
-    id: 4,
-    title: "Geometria",
-    image: require("../../assets/images/geometria.png"),
-    date: "12/12/2019 08:00",
-    place: "Biblioteca ICB",
-    price: "20"
-  }
-];
+import {
+  getUser,
+  getUpcomingTutorships
+} from "../../services/Firebase/Firebase";
+
 class SubjectNotification extends Component {
+  state = {
+    upComingTutorships: []
+  };
   onPressSubject = item => {
     const { navigation } = this.props;
     navigation.navigate("CommentTutor");
   };
+
+  componentDidMount() {
+    const uid = getUser().uid;
+    getUpcomingTutorships(uid).then(snapshot => {
+      const values = snapshot.val() ? snapshot.val() : {};
+      const upComingTutorships = Object.values(values);
+      this.setState({ upComingTutorships });
+    });
+  }
+
   render() {
     return (
-      <Layout subjects={SUBJECTS_CONST} onPressSubject={this.onPressSubject} />
+      <Layout
+        subjects={this.state.upComingTutorships}
+        onPressSubject={this.onPressSubject}
+      />
     );
   }
 }

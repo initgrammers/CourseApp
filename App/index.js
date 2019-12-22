@@ -14,7 +14,6 @@ export default class AppEntry extends Component {
     });
     this.setState({ isLoading: false });
   }
-
   render() {
     const { isLoading } = this.state;
     return (
